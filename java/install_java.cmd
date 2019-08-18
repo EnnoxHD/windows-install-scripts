@@ -1,0 +1,51 @@
+@echo off
+chcp 1252 >nul 2>&1
+title Java Installation
+echo Diese Installation muss als Administrator ausgeführt werden!
+echo. 
+pause
+echo.
+echo Java Installation
+echo -----------------
+echo [1/9] Generieren des Installationsskripts
+set PSDATEI=install_java.ps1
+rem =======================================
+rem ======--- Installationsskript ---======
+echo $root = $PSScriptRoot> %~dp0\%PSDATEI%
+echo $global:ProgressPreference = "SilentlyContinue">> %~dp0\%PSDATEI%
+echo $url = "https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.2%%2B10/OpenJDK12U-jdk_x64_windows_hotspot_12.0.2_10.zip">> %~dp0\%PSDATEI%
+echo $output = "$root\OpenJDK12U-jdk_x64_windows_hotspot_12.0.2_10.zip">> %~dp0\%PSDATEI%
+echo Write-Host "[3/9] Java wird heruntergeladen">> %~dp0\%PSDATEI%
+echo Invoke-WebRequest -Uri $url -OutFile $output>> %~dp0\%PSDATEI%
+echo Write-Host "[3/9] Java wurde heruntergeladen">> %~dp0\%PSDATEI%
+echo Write-Host "[4/9] Altes Java entfernen">> %~dp0\%PSDATEI%
+echo Remove-Item -Path "C:\Program Files\Java" -Force -Recurse -ErrorAction Ignore>> %~dp0\%PSDATEI%
+echo Write-Host "[4/9] Altes Java wurde entfernt">> %~dp0\%PSDATEI%
+echo Write-Host "[5/9] Java entpacken">> %~dp0\%PSDATEI%
+echo Expand-Archive -Path "$output" -DestinationPath "C:\Program Files\Java\">> %~dp0\%PSDATEI%
+echo Write-Host "[5/9] Java wurde entpackt">> %~dp0\%PSDATEI%
+echo Write-Host "[6/9] Java Archiv entfernen">> %~dp0\%PSDATEI%
+echo Remove-Item -Path "$output" -Force -Recurse -ErrorAction Ignore>> %~dp0\%PSDATEI%
+echo Write-Host "[6/9] Java Archiv wurde entfernt">> %~dp0\%PSDATEI%
+echo Write-Host "[7/9] Umgebungsvariablen setzen">> %~dp0\%PSDATEI%
+echo [Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Java\jdk-12.0.2+10\", "User")>> %~dp0\%PSDATEI%
+echo $userpath = [Environment]::GetEnvironmentVariable("Path", "User")>> %~dp0\%PSDATEI%
+echo [Environment]::SetEnvironmentVariable("Path", $userpath + "C:\Program Files\Java\jdk-12.0.2+10\bin\;", "User")>> %~dp0\%PSDATEI%
+echo Write-Host "[7/9] Umgebungsvariablen wurden gesetzt">> %~dp0\%PSDATEI%
+rem ======--- Installationsskript ---======
+rem =======================================
+echo [1/9] Installationsskript fertig
+echo [2/9] Ausführungsregel für das Skript anpassen
+powershell.exe Set-ExecutionPolicy Unrestricted -Scope CurrentUser
+echo [2/9] Ausführungsregel wurde angepasst
+powershell.exe %~dp0\%PSDATEI%
+echo [8/9] Installationsskript entfernen
+del /f /s /q %~dp0\%PSDATEI% >nul 2>&1
+echo [8/9] Installationsskript wurde entfernt
+echo [9/9] Ausführungsregel zurücksetzen
+powershell.exe Set-ExecutionPolicy Undefined -Scope CurrentUser
+echo [9/9] Ausführungsregel wurde zurückgesetzt
+echo ----------------------------
+echo Java ist fertig installiert!
+echo.
+pause
