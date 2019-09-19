@@ -38,7 +38,7 @@ echo [Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Java\j
 echo $userpath = [Environment]::GetEnvironmentVariable("Path", "User").Split(";")>> %~dp0\%PSDATEI%
 echo $clearpath = "">> %~dp0\%PSDATEI%
 echo for($i=0; $i -lt $userpath.length; $i++){>> %~dp0\%PSDATEI%
-echo if($userpath[$i] -like "*Java*"){>> %~dp0\%PSDATEI%
+echo if($userpath[$i] -notlike "*Java*" -and $userpath[$i] -notlike ""){>> %~dp0\%PSDATEI%
 echo $clearpath = $clearpath + $userpath[$i] + ";">> %~dp0\%PSDATEI%
 echo }>> %~dp0\%PSDATEI%
 echo }>> %~dp0\%PSDATEI%
