@@ -18,8 +18,8 @@ rem =======================================
 rem ======--- Installationsskript ---======
 echo $root = $PSScriptRoot> %~dp0\%PSDATEI%
 echo $global:ProgressPreference = "SilentlyContinue">> %~dp0\%PSDATEI%
-echo $url = "https://download.java.net/java/GA/jdk13/5b8a42f3905b406298b72d750b6919f6/33/GPL/openjdk-13_windows-x64_bin.zip">> %~dp0\%PSDATEI%
-echo $output = "$root\openjdk-13_windows-x64_bin.zip">> %~dp0\%PSDATEI%
+echo $url = "https://download.java.net/java/GA/jdk13.0.1/cec27d702aa74d5a8630c65ae61e4305/9/GPL/openjdk-13.0.1_windows-x64_bin.zip">> %~dp0\%PSDATEI%
+echo $output = "$root\openjdk-13.0.1_windows-x64_bin.zip">> %~dp0\%PSDATEI%
 echo Write-Host "[3/9] Java wird heruntergeladen">> %~dp0\%PSDATEI%
 echo Write-Host "Bitte einige Minuten warten...">> %~dp0\%PSDATEI%
 echo Invoke-WebRequest -Uri $url -OutFile $output>> %~dp0\%PSDATEI%
@@ -34,7 +34,7 @@ echo Write-Host "[6/9] Java Archiv entfernen">> %~dp0\%PSDATEI%
 echo Remove-Item -Path "$output" -Force -Recurse -ErrorAction Ignore>> %~dp0\%PSDATEI%
 echo Write-Host "[6/9] Java Archiv wurde entfernt">> %~dp0\%PSDATEI%
 echo Write-Host "[7/9] Umgebungsvariablen setzen">> %~dp0\%PSDATEI%
-echo [Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Java\jdk-13\", "User")>> %~dp0\%PSDATEI%
+echo [Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Java\jdk-13.0.1\", "User")>> %~dp0\%PSDATEI%
 echo $userpath = [Environment]::GetEnvironmentVariable("Path", "User").Split(";")>> %~dp0\%PSDATEI%
 echo $clearpath = "">> %~dp0\%PSDATEI%
 echo for($i=0; $i -lt $userpath.length; $i++){>> %~dp0\%PSDATEI%
@@ -42,7 +42,7 @@ echo if($userpath[$i] -notlike "*Java*" -and $userpath[$i] -notlike ""){>> %~dp0
 echo $clearpath = $clearpath + $userpath[$i] + ";">> %~dp0\%PSDATEI%
 echo }>> %~dp0\%PSDATEI%
 echo }>> %~dp0\%PSDATEI%
-echo [Environment]::SetEnvironmentVariable("Path", $clearpath + "C:\Program Files\Java\jdk-13\bin\;", "User")>> %~dp0\%PSDATEI%
+echo [Environment]::SetEnvironmentVariable("Path", $clearpath + "C:\Program Files\Java\jdk-13.0.1\bin\;", "User")>> %~dp0\%PSDATEI%
 echo Write-Host "[7/9] Umgebungsvariablen wurden gesetzt">> %~dp0\%PSDATEI%
 rem ======--- Installationsskript ---======
 rem =======================================
