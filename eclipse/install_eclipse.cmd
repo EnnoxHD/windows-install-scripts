@@ -18,8 +18,8 @@ rem =======================================
 rem ======--- Installationsskript ---======
 echo $root = $PSScriptRoot> %~dp0\%PSDATEI%
 echo $global:ProgressPreference = "SilentlyContinue">> %~dp0\%PSDATEI%
-echo $url = "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2019-09/R/eclipse-java-2019-09-R-win32-x86_64.zip&mirror_id=1">> %~dp0\%PSDATEI%
-echo $output = "$root\eclipse-java-2019-09-R-win32-x86_64.zip">> %~dp0\%PSDATEI%
+echo $url = "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2019-12/R/eclipse-java-2019-12-R-win32-x86_64.zip&mirror_id=1">> %~dp0\%PSDATEI%
+echo $output = "$root\eclipse-java-2019-12-R-win32-x86_64.zip">> %~dp0\%PSDATEI%
 echo Write-Host "[3/10] Eclipse IDE wird heruntergeladen">> %~dp0\%PSDATEI%
 echo Write-Host "Bitte einige Minuten warten...">> %~dp0\%PSDATEI%
 echo Invoke-WebRequest -Uri $url -OutFile $output>> %~dp0\%PSDATEI%
@@ -34,8 +34,8 @@ echo Write-Host "[6/10] Eclipse IDE Archiv entfernen">> %~dp0\%PSDATEI%
 echo Remove-Item -Path "$output" -Force -Recurse -ErrorAction Ignore>> %~dp0\%PSDATEI%
 echo Write-Host "[6/10] Eclipse IDE Archiv wurde entfernt">> %~dp0\%PSDATEI%
 echo Write-Host "[7/10] Eclipse IDE Erweiterungen werden installiert">> %~dp0\%PSDATEI%
-echo Write-Host "Bitte einige Minuten warten...">> %~dp0\%PSDATEI%
-echo Start-Process -Wait -FilePath "C:\Program Files\eclipse\eclipse.exe" -ArgumentList "-clean", "-purgeHistory", "-application org.eclipse.equinox.p2.director", "-noSplash", "-repository https://download.eclipse.org/eclipse/updates/4.13-P-builds", "-installIUs org.eclipse.jdt.java13patch.feature.group,org.eclipse.jdt.java13patch.source.feature.group">> %~dp0\%PSDATEI%
+rem echo Write-Host "Bitte einige Minuten warten...">> %~dp0\%PSDATEI%
+rem echo Start-Process -Wait -FilePath "C:\Program Files\eclipse\eclipse.exe" -ArgumentList "-clean", "-purgeHistory", "-application org.eclipse.equinox.p2.director", "-noSplash", "-repository https://download.eclipse.org/eclipse/updates/4.13-P-builds", "-installIUs org.eclipse.jdt.java13patch.feature.group,org.eclipse.jdt.java13patch.source.feature.group">> %~dp0\%PSDATEI%
 echo Write-Host "[7/10] Eclipse IDE Erweiterungen wurden installiert">> %~dp0\%PSDATEI%
 echo Write-Host "[8/10] Umgebungsvariablen setzen">> %~dp0\%PSDATEI%
 echo [Environment]::SetEnvironmentVariable("HOME", "%%USERPROFILE%%", "User")>> %~dp0\%PSDATEI%
